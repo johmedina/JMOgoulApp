@@ -88,9 +88,10 @@ class Home extends React.Component{
       .then((json) => {
         console.log(json)
         this.setState({
-          posts:[json, ...this.state.posts], 
           newPost: '', 
-          newPostTitle:''})
+          newPostTitle:'',
+          posts: [...this.state.posts, json], 
+        })
       })
   }
 

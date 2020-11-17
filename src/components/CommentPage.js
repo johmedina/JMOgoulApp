@@ -27,13 +27,13 @@ class CommentPage extends React.Component{
     let post = this.props.navigation.getParam('post')
     let at = this.props.navigation.getParam('accessToken')
     let idt = this.props.navigation.getParam('idToken')
-    this.setState({post: post, accessToken: at, idToken: idt})
-    this.fetchFromAPI();
+    this.setState({post: post, accessToken: at, idToken: idt}, function(){this.fetchFromAPI();})
+    
   };
 
   // fetch comments from the API
   fetchFromAPI(){
-    fetch('https://jsonplaceholder.typicode.com/comments', {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${this.state.post.id}/comments`, {
       headers: {
         'Authorization': `Bearer ${this.state.accessToken}`
       },
@@ -63,7 +63,7 @@ class CommentPage extends React.Component{
   };
 
   postComment(){
-    fetch('https://jsonplaceholder.typicode.com/comments', {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${this.state.post.id}/comments`, {
         method: 'POST',
         body: JSON.stringify({
           body: this.state.newComment,

@@ -59,38 +59,6 @@ class SignIn extends React.Component{
     }
   };
 
-  refresh = async () => {
-    try {
-      const authState = await refresh(config, {
-        refreshToken: this.state.refreshToken
-      });
-
-      this.setState({
-        accessToken: authState.accessToken || this.state.accessToken,
-        accessTokenExpirationDate:
-          authState.accessTokenExpirationDate || this.state.accessTokenExpirationDate,
-        refreshToken: authState.refreshToken || this.state.refreshToken
-      });
-    } catch (error) {
-      Alert.alert('Failed to refresh token', error.message);
-    }
-  };
-
-  revoke = async () => {
-    try {
-      await revoke(config, {
-        tokenToRevoke: this.state.accessToken,
-        sendClientId: true
-      });
-      this.setState({
-        accessToken: '',
-        accessTokenExpirationDate: '',
-        refreshToken: ''
-      });
-    } catch (error) {
-      Alert.alert('Failed to revoke token', error.message);
-    }
-  };
 
 
   render(){

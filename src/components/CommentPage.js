@@ -121,6 +121,7 @@ class CommentPage extends React.Component{
             renderItem={this.renderItem}
             onRefresh={() => this.onRefresh()}
             refreshing={this.state.isFetching}
+            keyExtractor={(item, index) => index.toString()}
             />
         </ScrollView>
         

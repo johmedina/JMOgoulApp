@@ -80,10 +80,18 @@ class Home extends React.Component{
         }),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
+          'Authorization': `Bearer ${this.state.accessToken}`
+
         },
       })
-        .then((response) => response.json())
-        .then((json) => this.setState({posts: [json, ...this.state.posts], newPost: '', newPostTitle:''}))
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json)
+        this.setState({
+          posts:[json, ...this.state.posts], 
+          newPost: '', 
+          newPostTitle:''})
+      })
   }
 
   render(){
@@ -118,11 +126,11 @@ class Home extends React.Component{
 
           {/* render the posts in a flatlist */}
           <FlatList
-          data={this.state.posts}
-          renderItem={this.renderItem}
-          onRefresh={() => this.onRefresh()}
-          refreshing={this.state.isFetching}
-          keyExtractor={(item, index) => index.toString()}
+            data={this.state.posts}
+            renderItem={this.renderItem}
+            onRefresh={() => this.onRefresh()}
+            refreshing={this.state.isFetching}
+            keyExtractor={(item, index) => index.toString()}
           />
         </ScrollView>
         
